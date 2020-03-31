@@ -1,9 +1,10 @@
-group 'org.smartregister'
+group 'org.smartregister.plugin.gradle'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'maven'
+apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
@@ -12,15 +13,10 @@ repositories {
     mavenLocal()
     google()
     jcenter()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
 }
 
 dependencies {
     compile localGroovy()
-    compile('org.smartregister:opensrp-client-core:1.9.2iuafuiaifd-SNAPSHOT') {
-        transitive=true
-    }
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
@@ -28,7 +24,7 @@ dependencies {
 gradlePlugin {
     plugins {
         simplePlugin {
-            id = 'org.smartregister.plugin.gradle.signing-plugin'
+            id = 'org.smartregister.plugin.gradle.android-release-signing-plugin'
             implementationClass = 'org.smartregister.plugin.gradle.SigningPlugin'
         }
     }
@@ -49,9 +45,9 @@ uploadArchives {
                 url "https://github.com/OpenSRP/"
 
                 scm {
-                    url "https://github.com/OpenSRP/opensrp-client-native-form"
-                    connection "scm:git@github.com:OpenSRP/opensrp-client-native-form.git"
-                    developerConnection "scm:git@github.com:OpenSRP/opensrp-client-native-form.git"
+                    url "https://github.com/OpenSRP/opensrp-gradle-plugins"
+                    connection "scm:git@github.com:OpenSRP/opensrp-gradle-plugins.git"
+                    developerConnection "scm:git@github.com:OpenSRP/opensrp-gradle-plugins.git"
                 }
 
                 licenses {
@@ -65,7 +61,7 @@ uploadArchives {
                 developers {
                     developer {
                         id "opensrp"
-                        name "OpenSRP Onadev"
+                        name "OpenSRP Ona Dev"
                     }
                 }
             }
