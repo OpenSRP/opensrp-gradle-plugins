@@ -1,0 +1,74 @@
+group 'org.smartregister'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    google()
+    jcenter()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
+}
+
+dependencies {
+    compile localGroovy()
+    compile('org.smartregister:opensrp-client-core:1.9.2iuafuiaifd-SNAPSHOT') {
+        transitive=true
+    }
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'org.smartregister.plugin.gradle.signing-plugin'
+            implementationClass = 'org.smartregister.plugin.gradle.SigningPlugin'
+        }
+    }
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name "OpenSRP Client Signing Plugin"
+                packaging jar
+                description "OpenSRP Client Signing Plugin"
+                url "https://github.com/OpenSRP/"
+
+                scm {
+                    url "https://github.com/OpenSRP/opensrp-client-native-form"
+                    connection "scm:git@github.com:OpenSRP/opensrp-client-native-form.git"
+                    developerConnection "scm:git@github.com:OpenSRP/opensrp-client-native-form.git"
+                }
+
+                licenses {
+                    license {
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "opensrp"
+                        name "OpenSRP Onadev"
+                    }
+                }
+            }
+        }
+    }
+}
