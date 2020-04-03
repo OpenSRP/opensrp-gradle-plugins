@@ -35,7 +35,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: sonatypeUsername, password: sonatypePassword)
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
             }
 
             pom.project {
@@ -67,4 +67,12 @@ uploadArchives {
             }
         }
     }
+}
+
+def getRepositoryPassword() {
+    return hasProperty('sonatypePassword') ? sonatypePassword : ""
+}
+
+def getRepositoryUsername() {
+    return hasProperty('sonatypeUsername') ? sonatypeUsername : ""
 }
