@@ -13,7 +13,7 @@ class SigningPlugin implements Plugin<Project> {
                 def isRunningOnTravis = System.getenv("CI") == "true"
                 if (isRunningOnTravis) {
                     // configure keystore
-                    project.android.signingConfigs.release.storeFile = file("../brisk_pesa.keystore")
+                    project.android.signingConfigs.release.storeFile = file("../android_release.keystore")
                     project.android.signingConfigs.release.storePassword = System.getenv("keystore_password")
                     project.android.signingConfigs.release.keyAlias = System.getenv("keystore_alias")
                     project.android.signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")

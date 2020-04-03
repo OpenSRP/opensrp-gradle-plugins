@@ -25,4 +25,4 @@ buildscript {
 apply plugin: 'org.smartregister.plugin.gradle.android-release-signing-plugin'
 ```
 
-NOTE: This plugin assumes that your Android project has its release keystore uploaded to Travis.
+NOTE: This plugin assumes that your Android project has its release keystore uploaded to Travis CI as `android_release.keystore` and the `keystore_password`, `keystore_alias` and `keystore_alias_password` are all set as environment variables in Travis CI.
