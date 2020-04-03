@@ -1,0 +1,78 @@
+group 'org.smartregister.plugin.gradle'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'maven'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    google()
+    jcenter()
+}
+
+dependencies {
+    compile localGroovy()
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'org.smartregister.plugin.gradle.android-release-signing-plugin'
+            implementationClass = 'org.smartregister.plugin.gradle.SigningPlugin'
+        }
+    }
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+            }
+
+            pom.project {
+                name "OpenSRP Client Signing Plugin"
+                packaging jar
+                description "OpenSRP Client Signing Plugin"
+                url "https://github.com/OpenSRP/"
+
+                scm {
+                    url "https://github.com/OpenSRP/opensrp-gradle-plugins"
+                    connection "scm:git@github.com:OpenSRP/opensrp-gradle-plugins.git"
+                    developerConnection "scm:git@github.com:OpenSRP/opensrp-gradle-plugins.git"
+                }
+
+                licenses {
+                    license {
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "opensrp"
+                        name "OpenSRP Ona Dev"
+                    }
+                }
+            }
+        }
+    }
+}
+
+def getRepositoryPassword() {
+    return hasProperty('sonatypePassword') ? sonatypePassword : ""
+}
+
+def getRepositoryUsername() {
+    return hasProperty('sonatypeUsername') ? sonatypeUsername : ""
+}
