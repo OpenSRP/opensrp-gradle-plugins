@@ -21,6 +21,10 @@ script:
   - chmod 755 gradlew
   - ls -la
   - travis_wait ./gradlew clean build --stacktrace
+  - cd ../gradle-jarjar-plugin
+  - chmod 755 gradlew
+  - ls -la
+  - travis_wait ./gradlew clean build --stacktrace
 
 notifications:
   slack:
