@@ -29,7 +29,7 @@ NOTE: This plugin assumes that your Android project has its release keystore upl
 
 
 
-radle JarJar Repackage Plugin
+Gradle JarJar Repackage Plugin
 ==============================
 
 Plugin for gradle which allows you to repackage jar-libraries with different package names using [JarJar][1] tool.
