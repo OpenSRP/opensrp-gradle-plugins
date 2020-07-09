@@ -27,12 +27,9 @@ apply plugin: 'org.smartregister.plugin.gradle.android-release-signing-plugin'
 
 NOTE: This plugin assumes that your Android project has its release keystore uploaded to Travis CI as `android_release.keystore` and the `keystore_password`, `keystore_alias` and `keystore_alias_password` are all set as environment variables in Travis CI.
 
+## Gradle JarJar Repackage Plugin
 
-
-Gradle JarJar Repackage Plugin
-==============================
-
-Plugin for gradle which allows you to repackage jar-libraries with different package names using [JarJar][1] tool.
+Plugin for gradle which allows you to repackage jar-libraries with different package names using [JarJar](https://code.google.com/archive/p/jarjar/) Library.
 
 In Android development there are some situations when library packaged inside your *.apk-file already exists on the device firmware.
 In such case java class loader prefer device's library version instead of your own packaged inside an *.apk.
@@ -42,7 +39,7 @@ Your newest library version can have changed signatures which can cause a runtim
 For example on some HTC devices there are pre-installed GSON library for serialization/deserialization to/from JSON.
 And if you use newest GSON version in your own project you'll get runtime errors with this.
 
-Installation
+### Installation
 ------------
 
 ```groovy
