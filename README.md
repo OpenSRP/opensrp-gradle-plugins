@@ -39,7 +39,7 @@ In such case java class loader prefer device's library version instead of your o
 If you using newest version of library than that that exists on a device you can stuck in a trouble.
 Your newest library version can have changed signatures which can cause a runtime exception.
 
-For example on some HTC devices there are pre-installed GSON library for sereializing/desereializing to/from JSON.
+For example on some HTC devices there are pre-installed GSON library for serialization/deserialization to/from JSON.
 And if you use newest GSON version in your own project you'll get runtime errors with this.
 
 Installation
