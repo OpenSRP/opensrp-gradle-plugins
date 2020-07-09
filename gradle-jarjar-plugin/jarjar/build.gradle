@@ -21,7 +21,7 @@ artifacts {
 
 
 def isReleaseBuild() {
-    return VERSION_NAME.contains("SNAPSHOT") == false
+    return !VERSION_NAME.contains("SNAPSHOT")
 }
 
 apply from: '../maven.gradle'
